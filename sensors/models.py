@@ -10,7 +10,8 @@ class Sensor(models.Model):
         ('WL', 'Water Level'),
         ('Temp', 'Temperature'),
         ('SM', 'Soil Moisture'),
-        ('HDT', 'Humidity')
+        ('HDT', 'Humidity'),
+        ('RS', 'RainSensor')
     )
     sensor_type = models.CharField(max_length=20, choices=sensor_types, default='Temp')
     add_time = models.DateTimeField(auto_now_add=True)
@@ -20,6 +21,7 @@ class Sensor(models.Model):
         return str(self.id) + " ( " + self.sensor_type + " )"
 
 class Actuator(models.Model):
+    name = models.CharField(max_length=10)
     state = models.IntegerField()
 
 class SensorData(models.Model):

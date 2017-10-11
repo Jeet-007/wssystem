@@ -13,7 +13,7 @@ from django.core.urlresolvers import reverse
 def add_sensor_data(request):
     if request.method == 'POST':
         if request.POST.get('abc'):
-            act = Actuator.objects.all()[0]
+            act = Actuator.objects.get(parent_alias=request.POST.get('name'))
             act.state = request.POST.get('value')
             act.save()
         else:
