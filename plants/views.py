@@ -35,11 +35,13 @@ def add_plant(request):
         sensor4.parent = plant
         sensor4.save()
         sensor5 = Sensor()
-        sensor5.parent = 'RainSensor'
+        sensor5.parent = plant
+        sensor5.sensor_type = 'RainSensor'
         sensor5.save()
         actuator = Actuator()
         actuator.parent = plant
         actuator.name = request.POST.get('alias')
+        actuator.state = 0
         actuator.save()
 
         return HttpResponseRedirect(reverse('plants:dashboard'))
@@ -66,7 +68,7 @@ def plantboard(request, username):
     sensor_data_hum = SensorData.objects.filter(parent=hum_sensor)
     sensor_data_wlevel = SensorData.objects.filter(parent=wl_sensor)
     sensor_data_mois = SensorData.objects.filter(parent=moisture_sensor)
-    act = Actuator.objects.get(parent=plant)
+    act = Actuator.objects.get(name=plant.alias)
     try:
         temp = sensor_data_temp.latest('id')
     except Exception:
