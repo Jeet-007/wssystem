@@ -146,7 +146,8 @@ to {
 
     </style>
     <body bgcolor="white" class="dash" background="{% static 'plants/leef1.jpg' %}"  >
-      <div>
+        <div class="container">
+      <div style="width:1345px;">
         <div class="fixed-action-btn vertic">
 <a class="btn-floating btn-large red">
  <i class="large material-icons">mode_edit</i>
@@ -160,8 +161,8 @@ to {
 <center class="card3"><font style="font-family: 'Exo 2', sans-serif;font-size:53px;width:1345px;height:5px;" color="black"><b>Dashboard: {{plant.alias}}</b></font><br><br>
     </center><br>
 </div>
-      <div style="width:100%;height:90%;margin-top:-22px">
-    <div class="carousel carousel-slider center" style = "height: 100vh;box-shadow: 0px 30px 60px #000;" data-indicators="true">
+      <div style="width:1345px;height:800px;margin-top:-22px">
+    <div class="carousel carousel-slider center" style = "height: 70vh;box-shadow: 0px 30px 60px #000;" data-indicators="true">
     <div  class="carousel-item" id='myChart1'>
     </div>
     <div  class="carousel-item" id='myChart2'>
@@ -179,7 +180,7 @@ to {
     <div style="width:1345px;height:800px;margin-top:20px;background-image: url({% static 'plants/abs.jpg' %});" >
 
 
-  <div class="card2" style="margin-top:-70px;margin:20px;margin-left:100px;float:left;width:440px;height:440px;font-size:30px;"><b><center>WATER TANK</center></b>
+  <div class="card2" style="margin-top:-80px;margin:20px;margin-left:100px;float:left;width:440px;height:440px;font-size:30px;"><b><center>WATER TANK</center></b>
     <div class="glass">
     <div class="water"></div>
   </div>
@@ -201,11 +202,15 @@ to {
 </div></a>
 <div class="card1" style="width:200px;float:left;margin-left:50px;margin-top:20px;height:200px">
 <center style="color:black;z-index:1;"><br><b>Actuator State<br><br></b></centre>
-<i class="ion-toggle-filled" style="font-size:80px;margin-left:-120px;color:black;"></i><span style = "color:black;font-size:20px;">&nbsp;&nbsp;<b>{{act.state}}</b></span>
+<i class="ion-toggle-filled" style="font-size:80px;margin-left:-110px;color:black;"></i><span style = "color:black;font-size:20px;">&nbsp;&nbsp;<b>{{act.state}}</b></span>
 </div>
-<div id="div1" style="width:200px;height:210px;float:left;margin-top:90px;margin-left:0px" >
+<div id="div1" style="width:200px;height:210px;float:left;margin-top:34px;margin-left:180px" >
   <center style="font-size:20px;margin-top:-4px;"><b>Plant Status</b></center>
  <img src="{% static 'plants/plant_st.png'%}">
+</div>
+<div class="card1" style="float:left;width:200px;height:200px;margin-top:34px;margin-left:55px;">
+  <center style="z-index:1;color:black"><br><b>Rain Sensor</b></center>
+<i class="ion-ios-rainy" style="font-size:100px;margin-left:10px;color:black;z-index:1;"></i><span style = "color:black;font-size:20px">&nbsp;&nbsp;<b>{{rain.value}}</b></span>
 </div>
 </div>
 <br><br>
@@ -301,8 +306,8 @@ to {
       zoom: 12,
       center: c1
     });
-    var s=119;
-    if(s>18)
+
+    if({{moisture.value}}>20)
     {
     var marker1 = new google.maps.Marker({
       position: iiit,
@@ -611,7 +616,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
     zingchart.render({
       id: 'myChart2',
       data: myConfig,
-      height: 700
+      height: 700,
       width: 1345,
     });
   </script>
@@ -747,7 +752,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
     zingchart.render({
       id: 'myChart3',
       data: myConfig,
-      height: 700
+      height: 900,
       width: 1345,
     });
   </script>
@@ -762,6 +767,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
   }
 
 </script>
-
+</div>
     </body>
   </html>

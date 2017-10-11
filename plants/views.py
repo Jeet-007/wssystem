@@ -60,6 +60,7 @@ def plantboard(request, username):
 
     sensors = plant.sensor_set.all()
     print(sensors)
+    rain_sensor = sensors.filter(sensor_type='RainSensor')[0]
     temp_sensor = sensors.filter(sensor_type='Temperature')[0]
     hum_sensor = sensors.filter(sensor_type='Humidity')[0]
     moisture_sensor = sensors.filter(sensor_type='Soil Moisture')[0]
@@ -68,6 +69,7 @@ def plantboard(request, username):
     sensor_data_hum = SensorData.objects.filter(parent=hum_sensor)
     sensor_data_wlevel = SensorData.objects.filter(parent=wl_sensor)
     sensor_data_mois = SensorData.objects.filter(parent=moisture_sensor)
+    sensor_data_rain = SensorData.objects.filter(parent=rain_sensor)
     act = Actuator.objects.get(name=plant.alias)
     try:
         temp = sensor_data_temp.latest('id')
@@ -85,7 +87,10 @@ def plantboard(request, username):
         mois = sensor_data_mois.latest('id')
     except Exception:
         mois = None
-
+    try:
+        rain = sensor_data_rain.latest('id')
+    except Exception:
+        rain = None
     temp_values = map(lambda x: x.value, list(sensor_data_temp)[-1:-11:-1])
     soil_values = map(lambda x: x.value, list(sensor_data_mois)[-1:-11:-1])
     context={'plant': plant,
@@ -94,6 +99,7 @@ def plantboard(request, username):
      'humidity': hum,
      'moisture': mois,
      'wlevel': wlevel,
+     'rain':rain,
      'act': act,
      'temp_values':temp_values[::-1],
      'soil_values':soil_values[::-1]
