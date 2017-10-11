@@ -128,35 +128,27 @@ to {
  <i class="large material-icons">mode_edit</i>
 </a>
 <ul>
- <li><a  href="plant2.html" class="btn-floating green"><i class="ion-leaf"></i></a></li>
- <li><a  href="pie1.html" class="btn-floating red darken-1"><i class="ion-pie-graph"></i></a></li>
- <li><a   href="homepage.html" class="btn-floating blue"><i class="ion-home"></i></a></li>
+ <li><a  href="{% static 'plants/plant2.html' %}" class="btn-floating green"><i class="ion-leaf"></i></a></li>
+ <li><a  href="{% static 'plants/pie1.html' %}" class="btn-floating red darken-1"><i class="ion-pie-graph"></i></a></li>
+ <li><a   href="{% url 'plants:dashboard' %}" class="btn-floating blue"><i class="ion-home"></i></a></li>
 </ul>
 </div>
 <center class="card3"><font style="font-family: 'Exo 2', sans-serif;font-size:53px;width:1345px;height:5px;" color="black"><b>Dashboard: {{plant.alias}}</b></font><br><br>
     </center><br>
 
       </div>
-
-    <div style="width:1345px;height:900px;margin-top:-22px">
-    <div class="carousel carousel-slider center" style = "height: 100vh;box-shadow: 0px 30px 60px #000;" data-indicators="true">
-    <div  class="carousel-item" href="#one!" id='myChart1'>
-      <a class="zc-ref" href="https://www.zingchart.com/">Charts by ZingChart</a>
-    </div>
-    <div  class="carousel-item" id='myChart2' href="#two!">
-      <a class="zc-ref" href="https://www.zingchart.com/">Charts by ZingChart</a>
-    </div>
-    <div class="carousel-item" id='myChart3' href="#three!">
-      <a class="zc-ref" href="https://www.zingchart.com/">Charts by ZingChart</a>
-    </div>
-  </div>
-
+    <div style="width:100%;height:100%;margin-top:-22px;">
+    <div class="carousel carousel-slider center" style = "height: 90vh;box-shadow: 0px 30px 60px #000;" data-indicators="true">
+    <div  class="carousel-item" href="#one!" id='myChart1'></div>
+    <div  class="carousel-item" id='myChart1' href="#two!"></div>
+    <div  class="carousel-item" id='myChart1' href="#three!"></div>
     </div>
 
+    </div>
     <p>
       {% if id %}
        <center><h3 style="color:white;">Your {{type}} sensor was registered with {{id}}</h3></center>
-      {% endif %}  
+      {% endif %}
     </p>
     <div style="width:1345px;height:500px;margin-top:20px;background-image: url({% static 'plants/abs.jpg' %});" >
 
@@ -173,17 +165,17 @@ to {
 
 <a href="temperature1.html"><div class="card1" style="float:left;width:200px;height:200px;margin-top:19px;margin-left:180px;">
   <center style="z-index:1;color:black"><br><b>Temperature <sup>o</sup> C</b></center>
-<i class="ion-thermometer" style="font-size:100px;margin-left:40px;color:black;z-index:1;"></i><span style = "color:black">{{temp.value}}</span>
+<i class="ion-thermometer" style="font-size:100px;margin-left:40px;color:black;z-index:1;"></i><span style = "color:black;font-size:20px">&nbsp;&nbsp;<b>{{temp.value}}</b></span>
 </div></a>
 <div id="g1" class="card1" style="float:left;width:200px;height:200px;margin-top:19px;margin-left:50px;">
 </div>
 <a href="humidity1.html"><div class="card1" style="width:200px;float:left;margin-left:180px;margin-top:20px;height:200px">
-  <center style="z-index:1;color:black"><br><b>LDR<br><br></b></centre>
-  <i class="ion-ios-partlysunny" style="font-size:80px;margin-left:-120px;color:black;z-index:1;"></i><span style = "color:black">{{humidity.value}}</span>
+  <center style="z-index:1;color:black"><br><b>LDR<br><br></b></centre>&emsp;&emsp;
+  <i class="ion-ios-partlysunny" style="font-size:80px;margin-left:-120px;color:black;z-index:1;"></i><span style = "color:black;font-size:20px;">&nbsp;&nbsp;<b>{{humidity.value}}</b></span>
 </div></a>
 <div class="card1" style="width:200px;float:left;margin-left:50px;margin-top:20px;height:200px">
-<center style="color:black;z-index:1;"><br><b>Turbidity<br><br></b></centre>
-<i class="ion-beaker" style="font-size:80px;margin-left:-120px;color:black;"></i>
+<center style="color:black;z-index:1;"><br><b>Actuator State<br><br></b></centre>
+<i class="ion-toggle-filled" style="font-size:80px;margin-left:-120px;color:black;"></i><span style = "color:black;font-size:20px;">&nbsp;&nbsp;<b>{{act.state}}</b></span>
 </div>
 </div>
 <br><br>
@@ -197,7 +189,7 @@ to {
 
   <div class="input-field col s12" style="width:200px;">
   <form method='post' action={% url 'sensors:addsensor'%}>
-  <input type="hidden" name="alias" value="{{plant.alias}}">      
+  <input type="hidden" name="alias" value="{{plant.alias}}">
   <select name="type">
    <option value="" disabled selected>Choose your Sensor</option>
    <option value="Water Level">Water Level</option>
@@ -247,7 +239,7 @@ to {
       symbol: '%',
       min: 0,
       max: 100,
-      title:"Soil Moisture",
+      title:"Soil Moisture (m3/v)",
       label: "",
       shadowOpacity: 1,
       shadowSize: 5,
@@ -307,7 +299,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
             $('.carousel.carousel-slider').carousel({full_width: true});
             setInterval(function(){
   $('.carousel').carousel('next');
-}, 7000);
+}, 15000);
 
 </script>
 
@@ -343,37 +335,29 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
           "font-size": "14px"
         }
       },
-      "scale-x": {
-        "min-value": 1507104000000,
-        "shadow": 0,
-        "step": "7000000",
+       "scale-x": {
+        "values":"1:10:1",
         "line-color": "#f6f7f8",
+        "shadow": 0,
         "tick": {
           "line-color": "#f6f7f8"
         },
         "guide": {
-          "line-color": "#f6f7f8"
+          "line-color": "#f6f7f8",
+          "line-style": "dashed"
         },
         "item": {
           "font-color": "#f6f7f8"
         },
-        "transform": {
-          "type": "date",
-          "all": "%D, %d %M<br />%h:%i %A",
-          "guide": {
-            "visible": false
-          },
-          "item": {
-            "visible": false
-          }
-        },
         "label": {
-          "visible": false
+          "text": "Date and Time",
+          "font-color": "#f6f7f8"
         },
-        "minor-ticks": 0
+        "minor-ticks": 0,
+        "thousands-separator": ","
       },
       "scale-y": {
-        "values": "0:60:10",
+        "values": "15:45:5",
         "line-color": "#f6f7f8",
         "shadow": 0,
         "tick": {
@@ -427,7 +411,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
       },
       "series": [{
        // "values": {{tem}},
-       "values":[32.1,28.5,25.5,27,27.7,30,31.9,30.2,31.7,32,33.3,33.1,35.4],
+       "values":{{temp_values}},
         "text": "Temperature",
         "line-color": "#0dc3f8",
         "legend-marker": {
@@ -487,34 +471,26 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
           "font-size": "14px"
         }
       },
-      "scale-x": {
-        "min-value": 1507104000000,
-        "shadow": 0,
-        "step": "7000000",
+       "scale-x": {
+        "values":"1:10:1",
         "line-color": "#f6f7f8",
+        "shadow": 0,
         "tick": {
           "line-color": "#f6f7f8"
         },
         "guide": {
-          "line-color": "#f6f7f8"
+          "line-color": "#f6f7f8",
+          "line-style": "dashed"
         },
         "item": {
           "font-color": "#f6f7f8"
         },
-        "transform": {
-          "type": "date",
-          "all": "%D, %d %M<br />%h:%i %A",
-          "guide": {
-            "visible": false
-          },
-          "item": {
-            "visible": false
-          }
-        },
         "label": {
-          "visible": false
+          "text": "Date and Time",
+          "font-color": "#f6f7f8"
         },
-        "minor-ticks": 0
+        "minor-ticks": 0,
+        "thousands-separator": ","
       },
       "scale-y": {
         "values": "0:100:10",
@@ -594,7 +570,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
     zingchart.render({
       id: 'myChart2',
       data: myConfig,
-      height: 700,
+      height: 700
       width: 1345,
     });
   </script>
@@ -607,7 +583,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
       "utc": true,
       "title": {
         "y": "7px",
-        "text": "Pressure Analytics",
+        "text": "Soil Moisture Analytics",
         "background-color": "#003849",
         "font-size": "24px",
         "font-color": "white",
@@ -631,37 +607,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
           "font-size": "14px"
         }
       },
-      "scale-x": {
-        "min-value": 1507104000000,
-        "shadow": 0,
-        "step": "7000000",
-        "line-color": "#f6f7f8",
-        "tick": {
-          "line-color": "#f6f7f8"
-        },
-        "guide": {
-          "line-color": "#f6f7f8"
-        },
-        "item": {
-          "font-color": "#f6f7f8"
-        },
-        "transform": {
-          "type": "date",
-          "all": "%D, %d %M<br />%h:%i %A",
-          "guide": {
-            "visible": false
-          },
-          "item": {
-            "visible": false
-          }
-        },
-        "label": {
-          "visible": false
-        },
-        "minor-ticks": 0
-      },
-      "scale-y": {
-        "values": "0:1200:100",
+       "scale-x": {
+        "values":"1:10:1",
         "line-color": "#f6f7f8",
         "shadow": 0,
         "tick": {
@@ -675,7 +622,28 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
           "font-color": "#f6f7f8"
         },
         "label": {
-          "text": "Pressure in mb",
+          "text": "Date and Time",
+          "font-color": "#f6f7f8"
+        },
+        "minor-ticks": 0,
+        "thousands-separator": ","
+      },
+      "scale-y": {
+        "values": "0:100:10",
+        "line-color": "#f6f7f8",
+        "shadow": 0,
+        "tick": {
+          "line-color": "#f6f7f8"
+        },
+        "guide": {
+          "line-color": "#f6f7f8",
+          "line-style": "dashed"
+        },
+        "item": {
+          "font-color": "#f6f7f8"
+        },
+        "label": {
+          "text": "Soil Moisture (in %)",
           "font-color": "#f6f7f8"
         },
         "minor-ticks": 0,
@@ -715,8 +683,8 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
       },
       "series": [{
        // "values": {{pressure}},
-       "values":[32.1,28.5,25.5,27,27.7,30,31.9,30.2,31.7,32,33.3,33.1,35.4],
-        "text": "Pressure",
+       "values":{{soil_values}},
+        "text": "Soil Moisture",
         "line-color": "#2df711",
         "legend-marker": {
           "type": "circle",
@@ -738,7 +706,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAy7wSlEOIGjQwmvxDA8iu2BTj
     zingchart.render({
       id: 'myChart3',
       data: myConfig,
-      height: 700,
+      height: 700
       width: 1345,
     });
   </script>

@@ -13,13 +13,19 @@ class Sensor(models.Model):
         ('HDT', 'Humidity')
     )
     sensor_type = models.CharField(max_length=20, choices=sensor_types, default='Temp')
+    add_time = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
-        return str(self.id) + " ( " + self.sensor_type + " )" 
+        return str(self.id) + " ( " + self.sensor_type + " )"
+
+class Actuator(models.Model):
+    state = models.IntegerField()
 
 class SensorData(models.Model):
     parent = models.ForeignKey(Sensor, on_delete=models.CASCADE)
     value = models.FloatField(default=0.00)
+    read_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.parent.__str__() + " ===> " + str(self.value)     
+        return self.parent.__str__() + " ===> " + str(self.value)
